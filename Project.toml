@@ -3,7 +3,12 @@ uuid = "566c6826-af7b-4caa-a575-0e631d8efc19"
 authors = ["Adrian Salceanu <adrian.salceanu@gmail.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+GenieCache = "dec2e30d-c3e4-4386-8d4a-5e4ccb406543"
+Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+
 [compat]
+GenieCache = "0.1"
 julia = "1"
 
 [extras]
