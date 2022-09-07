@@ -10,7 +10,7 @@ makedocs(
     pages = [
         "Home" => "index.md",
         "GenieCacheFileCache API" => [
-          "GenieCacheFileCache" => "api/geniecachefilecache.md",
+          "GenieCacheFileCache" => "API/geniecachefilecache.md",
         ]
     ],
 )
