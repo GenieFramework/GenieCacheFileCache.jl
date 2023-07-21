@@ -3,6 +3,30 @@ module GenieCacheFileCache
 import Serialization
 import GenieCache
 
+
+const CACHE_PATH = Ref{String}(Base.Filesystem.mktempdir(prefix="jl_genie_cache_"))
+
+
+"""
+    cache_path()
+
+Returns the default path of the cache folder.
+"""
+function cache_path()
+  CACHE_PATH[]
+end
+
+
+"""
+    cache_path!(cachepath::AbstractString)
+
+Sets the default path of the cache folder.
+"""
+function cache_path!(cachepath::AbstractString)
+  CACHE_PATH[] = cachepath
+end
+
+
 """
     tocache(key::Any, content::Any; dir::String = "") :: Nothing
 
