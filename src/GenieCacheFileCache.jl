@@ -49,7 +49,7 @@ end
 
 Persists `content` onto the file system under the `key` key.
 """
-function GenieCache.tocache(key::Any, content::Any; dir::String = "") :: Nothing
+function GenieCache.tocache(key::Any, content::Any; dir::String = "", expiration::Int = GenieCache.cache_duration()) :: Nothing
   open(cache_path(string(key), dir = dir), "w") do io
     Serialization.serialize(io, content)
   end
@@ -63,10 +63,10 @@ end
 
 Retrieves from cache the object stored under the `key` key if the `expiration` delta (in seconds) is in the future.
 """
-function GenieCache.fromcache(key::Any, expiration::Int; dir::String = "") :: Union{Nothing,Any}
+function GenieCache.fromcache(key::Any; dir::String = "", expiration::Int = GenieCache.cache_duration()) :: Union{Nothing,Any}
   file_path = cache_path(string(key), dir = dir)
 
-  ( ! isfile(file_path) || stat(file_path).ctime + expiration < time() ) && return nothing
+  expiration > 0 && ( ! isfile(file_path) || stat(file_path).ctime + expiration < time() ) && return nothing
 
   try
     open(file_path) do io
